@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Poèmes d’Enzo</title>
+  <title>Poèmes de JDLF</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
   <canvas id="bgCanvas"></canvas>
 
   <header class="topbar">
-    <div class="logo">Poèmes d’Enzo</div>
+    <div class="logo">Poèmes de JDLF</div>
     <button id="toggleTheme" class="icon-btn">🌙</button>
   </header>
 
@@ -21,6 +22,13 @@
     <section id="list-section" class="screen active">
       <h1>Mes poèmes</h1>
       <p class="subtitle">Un espace intime pour mes mots.</p>
+
+      <div class="menu-buttons">
+        <button id="goFav" class="primary-btn">⭐ Mes favoris</button>
+        <button id="goTop" class="secondary-btn">🔥 Top poèmes</button>
+        <button id="goAuthor" class="secondary-btn">À propos de l’auteur</button>
+      </div>
+
       <div id="poemList" class="grid"></div>
     </section>
 
@@ -30,20 +38,68 @@
 
       <article class="poem-card">
         <h2 id="poemTitle"></h2>
+        <div class="nav-arrows">
+          <button id="prevBtn" class="secondary-btn">← Précédent</button>
+          <button id="nextBtn" class="secondary-btn">Suivant →</button>
+        </div>
         <p id="poemMeta" class="poem-meta"></p>
 
         <pre id="poemContent" class="poem-content"></pre>
 
         <div class="poem-actions">
           <button id="likeBtn" class="icon-text-btn">❤️ <span id="likeCount">0</span></button>
+          <button id="favBtn" class="icon-text-btn">⭐ <span id="favCount">0</span></button>
           <span class="meta">Lectures : <span id="viewCount">0</span></span>
         </div>
 
         <div class="poem-tools">
           <button id="immersiveBtn" class="primary-btn">Lecture immersive</button>
           <button id="copyBtn" class="secondary-btn">Copier</button>
+          <button id="shareBtn" class="secondary-btn">Partager</button>
         </div>
       </article>
+    </section>
+
+    <!-- PAGE FAVORIS -->
+    <section id="fav-section" class="screen">
+      <button class="secondary-btn" id="backFav">← Retour</button>
+      <h1>Mes favoris</h1>
+      <p class="subtitle">Les poèmes que tu as marqués d’une étoile.</p>
+      <div id="favList" class="grid"></div>
+    </section>
+
+    <!-- PAGE TOP POÈMES -->
+    <section id="top-section" class="screen">
+      <button class="secondary-btn" id="backTop">← Retour</button>
+      <h1>Top Poèmes</h1>
+      <p class="subtitle">Les poèmes les plus aimés par tous les lecteurs.</p>
+      <div id="topList" class="grid"></div>
+    </section>
+
+    <!-- PAGE AUTEUR -->
+    <section id="author-section" class="screen">
+      <button class="secondary-btn" id="backAuthor">← Retour</button>
+      <h1>À propos de l’auteur</h1>
+
+      <div class="author-card">
+        <img src="icons/icon-192.png" alt="Auteur" class="author-photo">
+
+        <p>
+          JDLF est un auteur qui écrit avec le cœur, en explorant la vulnérabilité,
+          l’amour, la fatigue intérieure et les contradictions humaines.
+        </p>
+
+        <p>
+          Ses poèmes sont des fragments de lui-même, des lettres ouvertes à ceux
+          qui se reconnaissent dans le doute, l’attachement, la nostalgie et la
+          reconstruction silencieuse.
+        </p>
+
+        <p>
+          Chaque texte est une tentative de mettre des mots sur ce qui brûle
+          à l’intérieur, sans filtre, sans langue de bois.
+        </p>
+      </div>
     </section>
 
     <!-- MODE IMMERSIF -->
@@ -52,11 +108,21 @@
         <button id="closeImmersive" class="icon-btn close-immersive">✕</button>
         <h2 id="immTitle"></h2>
         <pre id="immContent"></pre>
+
+        <div class="immersive-arrows">
+          <button id="immPrev" class="immersive-btn">←</button>
+          <button id="immNext" class="immersive-btn">→</button>
+        </div>
       </div>
     </section>
 
   </main>
 
   <script src="script.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
 </body>
 </html>
